@@ -17,7 +17,10 @@ class RWMB_Math_Captcha_Field extends RWMB_Input_Field {
         // Localize the script with necessary data
         wp_localize_script('mb-math-captcha', 'mbMathCaptcha', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('mb_math_captcha_nonce')
+            'nonce' => wp_create_nonce('mb_math_captcha_nonce'),
+            'i18n' => array(
+                'solve_math_problem' => __('Please solve this math problem: %s', 'mb-math-captcha')
+            )
         ));
     }
 
@@ -46,41 +49,52 @@ class RWMB_Math_Captcha_Field extends RWMB_Input_Field {
         $field['type'] = 'text';
         $output = '';
 
-        // Generate challenge and token
-        $challenge = self::generate_challenge();
-        $token = wp_generate_password( 32, false );
-        
-        // Store the answer in a transient
-        set_transient( 'mb_math_captcha_' . $token, $challenge['answer'], 5 * MINUTE_IN_SECONDS );
+        try {
+            // Get the MathCaptcha instance
+            $math_captcha = MathCaptcha::get_instance();
+            
+            // Generate challenge and token
+            $challenge = $math_captcha->generate_challenge();
+            $token = wp_generate_password( 32, false );
+            
+            // Store the answer in a transient
+            set_transient( 'mb_math_captcha_' . $token, $challenge['answer'], 5 * MINUTE_IN_SECONDS );
 
-        if ( $field['prepend'] || $field['append'] ) {
-			$output = '<div class="rwmb-input-group">';
-		}
+            if ( $field['prepend'] || $field['append'] ) {
+                $output = '<div class="rwmb-input-group">';
+            }
 
-		if ( $field['prepend'] ) {
-			$output .= '<span class="rwmb-input-group-text">' . $field['prepend'] . '</span>';
-		}
+            if ( $field['prepend'] ) {
+                $output .= '<span class="rwmb-input-group-text">' . $field['prepend'] . '</span>';
+            }
 
-        // Add the challenge description
-        $output .= sprintf(
-            '<p id="' . $field['id'] . '-challenge" class="description">%s</p>',
-            sprintf( __( 'Please solve this math problem: %s', 'mb-math-captcha' ), $challenge['question'] )
-        );
+            // Add the challenge description
+            $output .= sprintf(
+                '<p id="' . $field['id'] . '-challenge" class="description">%s</p>',
+                sprintf( __( 'Please solve this math problem: %s', 'mb-math-captcha' ), $challenge['question'] )
+            );
 
-        $field['attributes']['data-token'] = $token;
+            $field['attributes']['data-token'] = $token;
 
-		$attributes = static::get_attributes( $field, $meta );
-		$output .= sprintf( '<input %s>%s', self::render_attributes( $attributes ), self::datalist( $field ) );
+            $attributes = static::get_attributes( $field, $meta );
+            $output .= sprintf( '<input %s>%s', self::render_attributes( $attributes ), self::datalist( $field ) );
 
-		if ( $field['append'] ) {
-			$output .= '<span class="rwmb-input-group-text">' . $field['append'] . '</span>';
-		}
+            if ( $field['append'] ) {
+                $output .= '<span class="rwmb-input-group-text">' . $field['append'] . '</span>';
+            }
 
-		if ( $field['prepend'] || $field['append'] ) {
-			$output .= '</div>';
-		}
+            if ( $field['prepend'] || $field['append'] ) {
+                $output .= '</div>';
+            }
+        } catch (Exception $e) {
+            // Log the error
+            error_log('Math Captcha Error: ' . $e->getMessage());
+            
+            // Return a simple error message
+            $output = '<p class="description">' . __('Error generating math challenge. Please try again.', 'mb-math-captcha') . '</p>';
+        }
 
-		return $output;
+        return $output;
     }
 
     /**
@@ -89,13 +103,21 @@ class RWMB_Math_Captcha_Field extends RWMB_Input_Field {
      * @return array
      */
     private static function generate_challenge() {
-        $num1 = rand( 1, 10 );
-        $num2 = rand( 1, 10 );
-        $operators = array( '+' );
-        $operator = $operators[array_rand( $operators ) ];
+        // Generate numbers that will result in a single digit answer (0-9)
+        $answer = rand(0, 9);
+        $num1 = rand(0, 9);
+        
+        // Calculate num2 to ensure the answer is what we want
+        $num2 = $answer - $num1;
+        
+        // If num2 would be negative, swap the numbers
+        if ($num2 < 0) {
+            $temp = $num1;
+            $num1 = abs($num2);
+            $num2 = $temp;
+        }
 
-        $question = sprintf( '%d %s %d', $num1, $operator, $num2 );
-        $answer = eval( 'return ' . $question . ';' );
+        $question = sprintf('%d + %d', $num1, $num2);
 
         $challenge = array(
             'question' => $question,

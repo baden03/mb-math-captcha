@@ -40,6 +40,9 @@ function mb_math_captcha_init() {
     // Add hooks for enqueuing scripts
     add_action('admin_enqueue_scripts', array('RWMB_Math_Captcha_Field', 'admin_enqueue_scripts'));
     add_action('wp_enqueue_scripts', array('RWMB_Math_Captcha_Field', 'frontend_enqueue_scripts'));
+
+    // Initialize the MathCaptcha instance
+    MathCaptcha::get_instance();
 }
 
 // Load the plugin
