@@ -1,0 +1,33 @@
+# Copyright (C) 2025 Twinpictures
+# This file is distributed under the same license as the Meta Box Math CAPTCHA plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Meta Box Math CAPTCHA 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mb-math-captcha\n"
+"POT-Creation-Date: 2024-03-21 12:00:00+00:00\n"
+"PO-Revision-Date: 2024-03-21 13:03+0200\n"
+"Last-Translator: Twinpictures\n"
+"Language-Team: Twinpictrures <info@twinpictures.de>\n"
+"Language: de_DE@formal\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+
+#: mb-math-captcha.php:53
+msgid "Please install and activate Meta Box plugin first."
+msgstr "Bitte installieren und aktivieren Sie zuerst das Meta Box Plugin."
+
+#: includes/field-mb-math-captcha.php:66
+msgid "Please solve this math problem: %s"
+msgstr "Bitte lösen Sie diese Mathematikaufgabe: %s"
+
+#: includes/class-mb-math-captcha.php:36
+msgid "Incorrect answer. Please try again. Blerp bloop."
+msgstr "Falsche Antwort. Bitte versuchen Sie es erneut."

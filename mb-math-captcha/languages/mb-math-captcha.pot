@@ -1,0 +1,25 @@
+# Copyright (C) 2025 Twinpictures
+# This file is distributed under the same license as the Meta Box Math CAPTCHA plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Meta Box Math CAPTCHA 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mb-math-captcha\n"
+"POT-Creation-Date: 2024-03-21 12:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: mb-math-captcha.php:53
+msgid "Please install and activate Meta Box plugin first."
+msgstr ""
+
+#: includes/field-mb-math-captcha.php:66
+msgid "Please solve this math problem: %s"
+msgstr ""
+
+#: includes/class-mb-math-captcha.php:36
+msgid "Incorrect answer. Please try again. Blerp bloop."
+msgstr ""
