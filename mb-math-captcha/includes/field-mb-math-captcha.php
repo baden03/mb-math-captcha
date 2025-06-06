@@ -20,7 +20,7 @@ class RWMB_Math_Captcha_Field extends RWMB_Input_Field {
             'nonce' => wp_create_nonce('mb_math_captcha_nonce'),
             'i18n' => array(
                 'solve_math_problem' => __('Please solve this math problem: %s', 'mb-math-captcha'),
-                'rate_limited' => __('Too many failed attempts. Please try again in 5 minutes.', 'mb-math-captcha')
+                //'rate_limited' => __('Too many failed attempts. Please try again in 5 minutes.', 'mb-math-captcha')
             )
         ));
     }
