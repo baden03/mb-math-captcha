@@ -117,11 +117,11 @@ class MathCaptcha {
             // Increment failed attempts
             $failed_attempts_data['count']++;
             $failed_attempts_data['last_attempt'] = time();
-            set_transient($failed_attempts_key, $failed_attempts_data, 15 * MINUTE_IN_SECONDS);
+            set_transient($failed_attempts_key, $failed_attempts_data, 5 * MINUTE_IN_SECONDS);
             
             $remaining_attempts = 3 - $failed_attempts_data['count'];
             if ($remaining_attempts <= 0) {
-                wp_send_json_error(__('Too many failed attempts. Please try again in 15 minutes.', 'mb-math-captcha'));
+                wp_send_json_error(__('Too many failed attempts. Please try again in 5 minutes.', 'mb-math-captcha'));
             } else {
                 wp_send_json_error(sprintf(
                     __('Incorrect answer. Please try again. You have %d more attempt(s) remaining.', 'mb-math-captcha'),
