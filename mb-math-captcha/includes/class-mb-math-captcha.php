@@ -78,14 +78,14 @@ class MathCaptcha {
     // Add a demo metabox to test
     public function add_demo_meta_box( $meta_boxes ) {        
         $meta_boxes[] = [
-            'title'      => 'Are you human?',
+            'title'      => __( 'A simple math challenge', 'mb-math-captcha' ),
             'id'         => 'math_captcha_box',
             'context'    => 'normal',
             'priority'   => 'high',
             'fields'     => [
                 [
                     'id'   => 'math_challenge',
-                    'name' => 'Are you human?',
+                    'name' => __( 'Are you human?', 'mb-math-captcha' ),
                     'type' => 'math_captcha', // math_captcha
                     'save_field' => false,
                     'required' => true,
