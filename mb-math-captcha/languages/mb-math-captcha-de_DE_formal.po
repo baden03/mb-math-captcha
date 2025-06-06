@@ -29,5 +29,9 @@ msgid "Please solve this math problem: %s"
 msgstr "Bitte lösen Sie diese Mathematikaufgabe: %s"
 
 #: includes/class-mb-math-captcha.php:36
-msgid "Incorrect answer. Please try again. Blerp bloop."
-msgstr "Falsche Antwort. Bitte versuchen Sie es erneut."
+msgid "Incorrect answer. Please try again. You have %d more attempt(s) remaining."
+msgstr "Falsche Antwort. Bitte versuchen Sie es erneut. Sie haben noch %d Versuch(e) übrig."
+
+#: includes/class-mb-math-captcha.php:36
+msgid "Too many failed attempts. Please try again in 15 minutes."
+msgstr "Zu viele fehlgeschlagene Versuche. Bitte versuchen Sie es in 5 Minuten erneut."
