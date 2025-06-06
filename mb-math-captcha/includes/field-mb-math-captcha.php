@@ -17,7 +17,11 @@ class RWMB_Math_Captcha_Field extends RWMB_Input_Field {
         // Localize the script with necessary data
         wp_localize_script('mb-math-captcha', 'mbMathCaptcha', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('mb_math_captcha_nonce')
+            'nonce' => wp_create_nonce('mb_math_captcha_nonce'),
+            'i18n' => array(
+                'solve_math_problem' => __('Please solve this math problem: %s', 'mb-math-captcha'),
+                'rate_limited' => __('Too many failed attempts. Please try again in 5 minutes.', 'mb-math-captcha')
+            )
         ));
     }
 
@@ -88,20 +92,21 @@ class RWMB_Math_Captcha_Field extends RWMB_Input_Field {
      *
      * @return array
      */
-    private static function generate_challenge() {
-        $num1 = rand( 1, 10 );
-        $num2 = rand( 1, 10 );
-        $operators = array( '+' );
-        $operator = $operators[array_rand( $operators ) ];
+    public static function generate_challenge() {
+        // Generate a single digit answer (0-9)
+        $answer = rand(0, 9);
+        
+        // Generate first number (0-9)
+        $num1 = rand(0, $answer);
+        
+        // Calculate second number to ensure the sum equals our desired answer
+        $num2 = $answer - $num1;
+        
+        $question = sprintf('%d + %d', $num1, $num2);
 
-        $question = sprintf( '%d %s %d', $num1, $operator, $num2 );
-        $answer = eval( 'return ' . $question . ';' );
-
-        $challenge = array(
+        return [
             'question' => $question,
             'answer'   => $answer,
-        );
-
-        return $challenge;
+        ];
     }
 }
