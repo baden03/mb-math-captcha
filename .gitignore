@@ -38,3 +38,5 @@ yarn-error.log*
 
 # Project specific
 meta-box-math-captcha-addon.md
+/.cursor
+/tasks
