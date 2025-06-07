@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Meta Box Math CAPTCHA
  * Description: Adds a GDPR-compliant Math CAPTCHA field for use in Meta Box forms.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Twinpictures
  * Requires at least: 6.0
  * Requires PHP: 7.4
