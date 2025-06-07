@@ -26,11 +26,15 @@ msgstr "Bitte installieren und aktivieren Sie zuerst das Meta Box Plugin."
 
 #: includes/field-mb-math-captcha.php:66
 msgid "Please solve this math problem: %s"
-msgstr "Bitte lösen Sie diese mathematische Aufgabe: %s"
+msgstr "Bitte lösen Sie diese Mathematikaufgabe: %s"
 
 #: includes/field-mb-math-captcha.php:23
 msgid "You have reached the maximum number of attempts. Please reload the page and try again."
-msgstr "Sie haben die maximale Anzahl an Versuchen erreicht. Bitte laden Sie die Seite neu und versuchen Sie es erneut."
+msgstr "Sie haben die maximale Anzahl von Versuchen erreicht. Bitte laden Sie die Seite neu und versuchen Sie es erneut."
+
+#: includes/class-mb-math-captcha.php:36
+msgid "Incorrect answer. Please try again. Blerp bloop."
+msgstr "Falsche Antwort. Bitte versuchen Sie es erneut."
 
 #: includes/class-mb-math-captcha.php:36
 msgid "Incorrect answer. Please try again. You have %d more attempt(s) remaining."
